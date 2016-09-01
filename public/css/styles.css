@@ -13,6 +13,11 @@ body {
 	overflow: hidden;
 }
 
+#game_intro {
+	margin-top: 70px;
+	margin-bottom: -50px;
+}
+
 #gameover {
 	background: black,
 	opacity: 0.7;

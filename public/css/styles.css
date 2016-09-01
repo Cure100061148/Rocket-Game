@@ -14,8 +14,8 @@ body {
 	background: url(../images/background.jpg);
 	position: relative;
 	top: 50px;
-	width: 30%;
-	height: 70%;
+	width: 300px;
+	height: 500px;
 	overflow: hidden;
 }
 

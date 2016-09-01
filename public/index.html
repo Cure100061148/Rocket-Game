@@ -3,8 +3,8 @@
 	<head>
 		<title>Rocket Game</title>
 		<meta charset="utf-8">
-		<script src="jquery-3.1.0.min.js"></script>
-		<script src="soundmanager2-jsmin.js"></script>
+		<script src="scripts/jquery-3.1.0.min.js"></script>
+		<script src="scripts/soundmanager2-jsmin.js"></script>
 		<script>
 			// Get random integer
 			function getRandomInt(min, max) {
@@ -78,7 +78,7 @@
 				  onready: function() {
 				    mySound = soundManager.createSound({
 				      id: 'aSound',
-				      url: 'game_sound.mp3'
+				      url: 'others/game_sound.mp3'
 				    });
 				    
 				  	initGame();

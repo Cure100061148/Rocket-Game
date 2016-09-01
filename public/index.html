@@ -3,6 +3,7 @@
 	<head>
 		<title>Rocket Game</title>
 		<meta charset="utf-8">
+		<link rel="stylesheet" href="css/styles.css">
 		<script src="scripts/jquery-3.1.0.min.js"></script>
 		<script src="scripts/soundmanager2-jsmin.js"></script>
 		<script>
@@ -15,8 +16,8 @@
 			$(function() {
 				var $body = $("body"),
 					$stage = $("#stage"),
-					$player = $("#player"),
 					$score = $("#score"),
+					$player,
 					enemy_fall_speed = 3,
 					enemy_fall_max_speed = 12,
 					enemy_wave = 0,
@@ -44,6 +45,19 @@
 						$player.css("left", x + 100 + "px");					
 				}
 
+				// Keyboard right/left direction
+				function key_press_action(event) {
+					var x = parseInt($player.css("left"));
+					// left
+					if ((event.keyCode == 122 || event.keyCode == 46) && x > 10)
+						$player.css("left", x - 100 + "px");
+					// right
+					else if ((event.keyCode == 120 ||　event.keyCode == 47) && x < 210)
+						$player.css("left", x + 100 + "px");	
+
+					console.log(event.keyCode);
+				}
+
 
 				// Game restart
 				function initGame() {
@@ -53,8 +67,10 @@
 					score_add = 1;
 
 					// Player initial position
-					$player.css("left", ($stage.width() - $player.width())/2 + "px");
-					$player.css("top", $stage.height() - $player.height());
+					$stage.append("<div class='sprite player'></div>");
+					$player = $stage.find(".player");
+					$player.css("left", ($stage.width() - $player.width())/2  + "px");
+					$player.css("top", $stage.height() - $player.height()  + "px");
 					
 					// Score initial position
 					$score.css("left", $stage.width() - $score.width()-5 + "px");
@@ -62,7 +78,9 @@
 
 					// Init mouse click actions
 					$body.click(left_click_action);
-					$body.contextmenu(right_click_action);					
+					$body.contextmenu(right_click_action);		
+					// Init keyboard actions			
+					document.addEventListener("keypress", key_press_action);
 
 					createEnemy();
 
@@ -83,7 +101,6 @@
 				    
 				  	initGame();
 				  },
-
 				});
 
 
@@ -108,6 +125,9 @@
 					$body.unbind("click");
 					$body.unbind("contextmenu");
 
+					// Remove keyboard actions
+					document.removeEventListener("keypress", key_press_action);
+
 					// Clear timer 
 					clearInterval(loop);
 					clearInterval(speedup);
@@ -115,19 +135,6 @@
 					// Show up end page
 					$stage.append("<div id='gameover'>RETRY</div>");
 					$gameover = $("#gameover");
-					$gameover.css({
-						"background": "black",
-						"opacity": "0.7",
-						"width": "100%",
-						"height": "100%",
-						"position": "relative",
-						"color": "white",
-						"line-height": "500px",
-						"text-align": "center",
-						"font-size": "35px",
-						"z-index": "2"
-					});
-
 					$gameover.click(function() {
 						$gameover.unbind("click");
 						
@@ -136,6 +143,7 @@
 
 						// Clear all obstacles
 						$stage.find(".enemy").remove();
+						$stage.find(".player").remove();
 
 						initGame();
 					});
@@ -185,58 +193,13 @@
 			})
 		</script>
 		<style>
-			body {
-				text-align: center; /* everything will be centered */	
-			}
-			#stage {
-				display: inline-block;
-				text-align: left;
-				background: url(images/background.jpg);
-				position: relative;
-				top: 50px;
-				width: 300px;
-				height: 500px;
-				overflow: hidden;
-			}
-			.sprite {
-				display: inline-block;
-				position: absolute;
-				width: 80px;
-				height: 80px;
-			}
-			.player {
-				background: url(images/player.png) no-repeat;
-			}
-			.enemy {
-				background: url(images/enemy.gif) center;
-				z-index: 2;
-			}
-			.score {
-				color: white;
-				font-size: 24px;
-				font-weight: bolder;
-				width: 100%;
-				height: auto;
-				text-align: right;
-				z-index = 1;
-			}
-			.footer {
-				margin-top: 70px;
-			}
-			footer.footer {
-				margin-top: 0px;
-			}
-			.header {
-				font-size: 48px;
-				margin-bottom: -30px;
-			}
+			
 		</style>
 	</head>
 	<body>
 		<header class="header">Rocket Game</header>
 		<div id="stage">
 			<div id="score" class="sprite score">000000</div>
-			<div id="player" class="sprite player"></div>
 		</div>
 		<div class="footer">Reference from: <a href="https://www.youtube.com/watch?v=UshqgBJGLAo" target="_blank">從零開始的 jQuery 撰寫網頁遊戲教學</a></div>
 		<footer class="footer">Made by <a href="https://github.com/Cure100061148" targe="_blank">ChihYu</a> in Hsinchu, Taiwan</footer>

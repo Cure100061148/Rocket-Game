@@ -7,5 +7,5 @@ Right mouse clicks: rocket moves right
 Left mouse clicks: rocket moves left
 
 [Using keyboard]
-Right: x or /
-Left: z or .
+Right: A or K
+Left: S or L

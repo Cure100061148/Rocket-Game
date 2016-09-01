@@ -50,13 +50,13 @@
 				function key_press_action(event) {
 					var x = parseInt($player.css("left"));
 					// left
-					if ((event.keyCode == 122 || event.keyCode == 46) && x > 10)
+					if ((event.keyCode == 97 || event.keyCode == 107 || 
+						 event.charCode == 97 || event.charCode == 107) && x > 10)
 						$player.css("left", x - 100 + "px");
 					// right
-					else if ((event.keyCode == 120 ||　event.keyCode == 47) && x < 210)
+					else if ((event.keyCode == 115 ||　event.keyCode == 108 ||
+							  event.charCode == 115 || event.charCode == 108) && x < 210)
 						$player.css("left", x + 100 + "px");	
-
-					console.log(event.keyCode);
 				}
 
 
@@ -203,9 +203,9 @@
 			<div id="score" class="sprite score">000000</div>
 		</div>
 		<div id="game_intro">Control method<br/>
-			<i class="fa fa-arrow-right" aria-hidden="true"></i> : [mouse]right clicks/[keyboard]x or / 
+			<i class="fa fa-arrow-left" aria-hidden="true"></i> : [mouse]left clicks/[keyboard]A or K
 			<br/>
-			<i class="fa fa-arrow-left" aria-hidden="true"></i> : [mouse]left clicks/[keyboard]z or .
+			<i class="fa fa-arrow-right" aria-hidden="true"></i> : [mouse]right clicks/[keyboard]S or L 			
 		</div>
 		<div class="footer">Reference from: <a href="https://www.youtube.com/watch?v=UshqgBJGLAo" target="_blank">從零開始的 jQuery 撰寫網頁遊戲教學</a></div>
 		<footer class="footer">Made by <a href="https://github.com/Cure100061148" targe="_blank">ChihYu</a> in Hsinchu, Taiwan</footer>
